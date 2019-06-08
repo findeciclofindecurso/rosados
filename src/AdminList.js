@@ -14,13 +14,13 @@ class AdminList extends Component {
   componentDidMount() {
     this.setState({isLoading: true});
 
-    fetch('api/admin')
+    fetch('/rest/admin')
       .then(response => response.json())
       .then(data => this.setState({admins: data, isLoading: false}));
   }
 
   async remove(id) {
-    await fetch(`/api/admin/${id}`, {
+    await fetch(`/rest/admin/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
