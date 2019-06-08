@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {isOpen: false};
+    this.state = { isOpen: false };
     this.toggle = this.toggle.bind(this);
   }
 
@@ -18,12 +18,12 @@ export default class AppNavbar extends Component {
   render() {
     return <Navbar color="dark" dark expand="md">
       <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
-      <NavbarToggler onClick={this.toggle}/>
+      <NavbarToggler onClick={this.toggle} />
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
             <Link to="/admins">Gestión de administradores</Link>
-           </NavItem>
+          </NavItem>
         </Nav>
       </Collapse>
     </Navbar>;
