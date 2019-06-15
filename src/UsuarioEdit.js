@@ -3,13 +3,14 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-class AdminEdit extends Component {
+class UsuarioEdit extends Component {
 
   emptyItem = {
     username: '',
     email: '',
-    password: '',
-    telefono: ''
+    passwd: '',
+    bitacora:''
+  
   };
 
   constructor(props) {
@@ -24,8 +25,8 @@ class AdminEdit extends Component {
 
   async componentDidMount() {
     if (this.props.match.params.id !== 'new') {
-      const admin = await (await fetch(`http://localhost:8080/rest/admin/${this.props.match.params.id}`)).json();
-      this.setState({ item: admin });
+      const usuario = await (await fetch(`http://localhost:8080/rest/usuario/${this.props.match.params.id}`)).json();
+      this.setState({ item: usuario });
     } else {
       this.setState({ new: true })
     }
@@ -44,7 +45,7 @@ class AdminEdit extends Component {
     event.preventDefault();
     const { item } = this.state;
 
-    await fetch(`http://localhost:8080/rest/admin${this.state.new ? '' : '/' + item.username}`, {
+    await fetch(`http://localhost:8080/rest/usuario${this.state.new ? '' : '/' + item.username}`, {
       method: (this.state.new) ? 'POST' : 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -52,12 +53,12 @@ class AdminEdit extends Component {
       },
       body: JSON.stringify(item),
     });
-    this.props.history.push('/admins');
+    this.props.history.push('/users');
   }
 
   render() {
     const { item } = this.state;
-    const title = <h2>{item.username ? 'Edit Admin' : 'Add Admin'}</h2>;
+    const title = <h2>{item.username ? 'Edit Usuario' : 'Add Usuario'}</h2>;
 
     return <div>
       <AppNavbar />
@@ -75,23 +76,24 @@ class AdminEdit extends Component {
               onChange={this.handleChange} autoComplete="email" />
           </FormGroup>
           <FormGroup>
-            <Label for="telefono">telefono</Label>
-            <Input type="number" name="telefono" id="telefono" value={item.telefono || ''}
-              onChange={this.handleChange} autoComplete="telefono" />
-          </FormGroup>
-          <FormGroup>
             <Label for="password">Password</Label>
-            <Input type="text" name="password" id="password" value={item.password || ''}
+            <Input type="text" name="password" id="password" value={item.passwd || ''}
               onChange={this.handleChange} autoComplete="password" />
           </FormGroup>
           <FormGroup>
+            <Label for="bitacora">Bitacora</Label>
+            <Input type="text" name="bitacora" id="bitacora" value={item.bitacora || ''}
+              onChange={this.handleChange} autoComplete="bitacora" />
+          </FormGroup>
+          <FormGroup>
             <Button color="primary" type="submit">Save</Button>{' '}
-            <Button color="secondary" tag={Link} to="/admins">Cancel</Button>
+            <Button color="secondary" tag={Link} to="/users">Cancel</Button>
           </FormGroup>
         </Form>
       </Container>
     </div>
   }
+  
 }
 
-export default withRouter(AdminEdit);
+export default withRouter(UsuarioEdit);

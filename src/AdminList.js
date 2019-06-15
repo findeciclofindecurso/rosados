@@ -14,13 +14,13 @@ class AdminList extends Component {
   componentDidMount() {
     this.setState({isLoading: true});
 
-    fetch('/rest/admin')
+    fetch('http://localhost:8080/rest/admin')
       .then(response => response.json())
       .then(data => this.setState({admins: data, isLoading: false}));
   }
 
   async remove(id) {
-    await fetch(`/rest/admin/${id}`, {
+    await fetch(`http://localhost:8080/rest/admin/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -60,7 +60,7 @@ class AdminList extends Component {
           <div className="float-right">
             <Button color="success" tag={Link} to="/admins/new">Añadir admin</Button>
           </div>
-          <h3>Lista de usuarios</h3>
+          <h3>Lista de administradores</h3>
           <Table className="mt-4">
             <thead>
             <tr>

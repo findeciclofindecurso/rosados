@@ -21,8 +21,14 @@ export default class AppNavbar extends Component {
       <NavbarToggler onClick={this.toggle} />
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
+        <NavItem>
+            <Link to="/admins">Login</Link>
+          </NavItem>
+          <NavItem >
+            <Link to="/users">Usuarios</Link>
+          </NavItem>
           <NavItem>
-            <Link to="/admins">Gestión de administradores</Link>
+            <Link to="/admins">Administradores</Link>
           </NavItem>
         </Nav>
       </Collapse>
