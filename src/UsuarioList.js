@@ -46,14 +46,43 @@ class UsuarioList extends Component {
         <td>{usuario.passwd}</td>
         <td>
           <ButtonGroup>
-          <Button size="sm" color="primary" tag={Link} to={"/probar"}>Edit</Button>
           <Button size="sm" color="primary" tag={Link} to={"/users/"+usuario.username}>Edit</Button>
           <Button size="sm" color="danger" onClick={() => this.remove(usuario.username)}>Delete</Button>
+          <Button size="sm" color="secondary" tag={Link} to={"/bitacora/"+usuario.username}>Bitacoras</Button>
           </ButtonGroup>
         </td>
       </tr>
     });
+/*
+    const usuarioList = users.map(usuario => {
+      return <tr key={usuario.username}>
+        <td>{usuario.username}</td>
+        <td>{usuario.email}</td>
+        <td>{usuario.passwd}</td>
+        <td>
+        
+        {users.bitacora.map(bitacora => {
+             return <div key={bitacora.id}>
+                      {bitacora.id},
+                      {bitacora.fecha},
+                      {bitacora.ip}
+             
+                    </div>
+                 
+             })};
 
+-
+        </td>
+        <td>
+          <ButtonGroup>
+          <Button size="sm" color="primary" tag={Link} to={"/users/"+usuario.username}>Edit</Button>
+          <Button size="sm" color="danger" onClick={() => this.remove(usuario.username)}>Delete</Button>
+          <Button size="sm" color="secondary" tag={Link} to={"/bitacora/"+usuario.username}>Bitacoras</Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    });
+*/
     return (
       <div>
         <AppNavbar/>

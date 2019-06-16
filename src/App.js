@@ -6,7 +6,7 @@ import AdminList from './AdminList';
 import AdminEdit from './AdminEdit';
 import UsuarioList from './UsuarioList';
 import UsuarioEdit from './UsuarioEdit';
-
+import BitacoraList from './BitacoraList';
 
 class App extends Component {
   render() {
@@ -18,6 +18,7 @@ class App extends Component {
           <Route path='/admins/:id' component={AdminEdit}/>
           <Route path='/users' exact={true} component={UsuarioList}/>
           <Route path='/users/:username' component={UsuarioEdit}/>
+          <Route path='/bitacora' exact={true} component={BitacoraList}/>
         </Switch>
       </Router>
     )
