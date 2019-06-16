@@ -14,7 +14,7 @@ class BitacoraList extends Component {
   componentDidMount() {
     this.setState({isLoading: true});
 
-    fetch('http://localhost:8080/rest/bitacora')
+    fetch('/rest/bitacora')
       .then(response => response.json())
       .then(data => this.setState({bitacoras: data, isLoading: false}));
   }

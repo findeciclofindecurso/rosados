@@ -22,11 +22,16 @@ class UsuarioEdit extends Component {
   }
 
   async componentDidMount() {
-    if (this.props.match.params.id !== 'new') {
-      const usuario = await (await fetch(`http://localhost:8080/rest/usuario/${this.props.match.params.id}`)).json();
-      this.setState({ item: usuario });
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user && user.password.indexOf('ad') === 0) {
+      if (this.props.match.params.id !== 'new') {
+        const usuario = await (await fetch(`/rest/usuario/${this.props.match.params.id}`)).json();
+        this.setState({ item: usuario });
+      } else {
+        this.setState({ new: true })
+      }
     } else {
-      this.setState({ new: true })
+      window.history.back()
     }
   }
 
@@ -43,7 +48,7 @@ class UsuarioEdit extends Component {
     event.preventDefault();
     const { item } = this.state;
 
-    await fetch(`http://localhost:8080/rest/usuario${this.state.new ? '' : '/' + item.username}`, {
+    await fetch(`/rest/usuario${this.state.new ? '' : '/' + item.username}`, {
       method: (this.state.new) ? 'POST' : 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -82,7 +87,7 @@ class UsuarioEdit extends Component {
             <Button color="primary" type="submit">Save</Button>{' '}
             <Button color="secondary" tag={Link} to="/users">Cancel</Button>
           </FormGroup>
-          
+
         </Form>
       </Container>
     </div>
@@ -129,7 +134,7 @@ class UsuarioEdit extends Component {
       this.setState({ new: true })
     }
   }
-  
+
 
   handleChange(event) {
     const target = event.target;
@@ -192,7 +197,7 @@ class UsuarioEdit extends Component {
       </Container>
     </div>
   }
-  
+
 }
 
 export default withRouter(UsuarioEdit);

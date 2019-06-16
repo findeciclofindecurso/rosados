@@ -23,11 +23,16 @@ class AdminEdit extends Component {
   }
 
   async componentDidMount() {
-    if (this.props.match.params.id !== 'new') {
-      const admin = await (await fetch(`http://localhost:8080/rest/admin/${this.props.match.params.id}`)).json();
-      this.setState({ item: admin });
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user && user.password.indexOf('ad') === 0) {
+      if (this.props.match.params.id !== 'new') {
+        const admin = await (await fetch(`/rest/admin/${this.props.match.params.id}`)).json();
+        this.setState({ item: admin });
+      } else {
+        this.setState({ new: true })
+      }
     } else {
-      this.setState({ new: true })
+      window.history.back()
     }
   }
 
@@ -44,7 +49,7 @@ class AdminEdit extends Component {
     event.preventDefault();
     const { item } = this.state;
 
-    await fetch(`http://localhost:8080/rest/admin${this.state.new ? '' : '/' + item.username}`, {
+    await fetch(`/rest/admin${this.state.new ? '' : '/' + item.username}`, {
       method: (this.state.new) ? 'POST' : 'PUT',
       headers: {
         'Accept': 'application/json',
